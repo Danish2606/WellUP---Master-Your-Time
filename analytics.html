@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WellUp - Track your study hours and progress">
+    <meta name="theme-color" content="#00563F">
+    <title>Track Progress - WellUp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1 class="logo">WellUp</h1>
+                </a>
+                <span class="tagline">Track Progress</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="scheduling.html" class="nav-link">Schedule</a>
+                <a href="analytics.html" class="nav-link">Analytics</a>
+                <a href="focus.html" class="nav-link">Focus</a>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Analytics Page -->
+    <section class="analytics-page">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Track Your Progress</h2>
+                <p class="page-subtitle">Log your daily study hours and visualize your weekly progress</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="total-hours-week">0</span>
+                    <span class="stat-label">Hours This Week</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="avg-hours-day">0</span>
+                    <span class="stat-label">Daily Average</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="days-logged">0</span>
+                    <span class="stat-label">Days Logged</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="today-hours">0</span>
+                    <span class="stat-label">Hours Today</span>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="analytics-grid">
+                <!-- Log Hours Section -->
+                <div class="analytics-card">
+                    <h3>📝 Log Study Hours</h3>
+                    <form id="hours-form" class="hours-form">
+                        <div class="form-column">
+                            <label for="date-input" class="form-label">Date</label>
+                            <input 
+                                type="date" 
+                                id="date-input" 
+                                class="task-input"
+                                required
+                                aria-label="Study date"
+                            >
+                            
+                            <label for="hours-input" class="form-label">Hours Studied</label>
+                            <input 
+                                type="number" 
+                                id="hours-input" 
+                                class="task-input"
+                                placeholder="e.g., 2.5"
+                                min="0"
+                                max="24"
+                                step="0.5"
+                                required
+                                aria-label="Hours studied"
+                            >
+                            
+                            <label for="subject-input" class="form-label">Subject (Optional)</label>
+                            <input 
+                                type="text" 
+                                id="subject-input" 
+                                class="task-input"
+                                placeholder="e.g., Mathematics"
+                                aria-label="Subject"
+                            >
+                            
+                            <button type="submit" class="add-btn full-width">Log Hours</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Weekly Progress Chart -->
+                <div class="analytics-card chart-card">
+                    <h3>📊 This Week's Progress</h3>
+                    <div class="week-selector">
+                        <button id="prev-week" class="week-nav-btn">←</button>
+                        <span id="week-display">Current Week</span>
+                        <button id="next-week" class="week-nav-btn">→</button>
+                    </div>
+                    <div class="bar-chart" id="weekly-chart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                    <div class="chart-legend">
+                        <span>0h</span>
+                        <span>4h</span>
+                        <span>8h</span>
+                        <span>12h+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Log History -->
+            <div class="analytics-card full-width">
+                <h3>📚 Study Log History</h3>
+                <div class="filter-section">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="week">This Week</button>
+                    <button class="filter-btn" data-filter="month">This Month</button>
+                </div>
+                <div class="study-log-list" id="study-log-list">
+                    <!-- Study logs will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Insights -->
+            <div class="insights-section">
+                <h3>💡 Your Insights</h3>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">🏆</div>
+                        <h4>Most Productive Day</h4>
+                        <p id="most-productive-day">No data yet</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">📈</div>
+                        <h4>Consistency Streak</h4>
+                        <p id="consistency-streak">0 days</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">🎯</div>
+                        <h4>Weekly Goal</h4>
+                        <p id="weekly-goal-status">Track 7 days to see goal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 WellUp. Built for Republic Polytechnic students with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification" role="alert" aria-live="polite"></div>
+
+    <script src="js/analytics.js"></script>
+</body>
+</html>

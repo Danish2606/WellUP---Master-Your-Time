@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WellUp - Focus Mode with Pomodoro Timer">
+    <meta name="theme-color" content="#00563F">
+    <title>Focus Mode - WellUp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1 class="logo">WellUp</h1>
+                </a>
+                <span class="tagline">Focus Mode</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="scheduling.html" class="nav-link">Schedule</a>
+                <a href="analytics.html" class="nav-link">Analytics</a>
+                <a href="focus.html" class="nav-link">Focus</a>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Focus Mode Page -->
+    <section class="focus-page">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Focus Mode</h2>
+                <p class="page-subtitle">Use the Pomodoro technique to boost your productivity and maintain focus</p>
+            </div>
+
+            <!-- Pomodoro Timer Card -->
+            <div class="focus-container">
+                <div class="timer-card">
+                    <div class="timer-header">
+                        <h3 id="timer-mode-label">Work Session</h3>
+                        <p id="timer-description">Time to focus on your tasks</p>
+                    </div>
+                    
+                    <div class="timer-display-large" id="timer-display">25:00</div>
+                    
+                    <div class="timer-controls-large">
+                        <button id="timer-start" class="timer-btn-large primary">
+                            <span class="btn-icon">▶</span>
+                            Start
+                        </button>
+                        <button id="timer-pause" class="timer-btn-large" disabled>
+                            <span class="btn-icon">⏸</span>
+                            Pause
+                        </button>
+                        <button id="timer-reset" class="timer-btn-large">
+                            <span class="btn-icon">↻</span>
+                            Reset
+                        </button>
+                    </div>
+                    
+                    <div class="timer-mode-selector">
+                        <button class="mode-btn-large active" data-mode="work">
+                            <span class="mode-icon">💼</span>
+                            <span class="mode-text">
+                                <strong>Work</strong>
+                                <small>25 minutes</small>
+                            </span>
+                        </button>
+                        <button class="mode-btn-large" data-mode="short">
+                            <span class="mode-icon">☕</span>
+                            <span class="mode-text">
+                                <strong>Short Break</strong>
+                                <small>5 minutes</small>
+                            </span>
+                        </button>
+                        <button class="mode-btn-large" data-mode="long">
+                            <span class="mode-icon">🌴</span>
+                            <span class="mode-text">
+                                <strong>Long Break</strong>
+                                <small>15 minutes</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sessions Completed -->
+                <div class="stats-sidebar">
+                    <div class="stat-card">
+                        <h4>Today's Focus Sessions</h4>
+                        <div class="stat-number-large" id="sessions-today">0</div>
+                        <p class="stat-detail">Pomodoros completed</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h4>Total Focus Time</h4>
+                        <div class="stat-number-large" id="total-time">0h 0m</div>
+                        <p class="stat-detail">Time spent focused today</p>
+                    </div>
+
+                    <div class="tips-card">
+                        <h4>💡 Pomodoro Tips</h4>
+                        <ul class="tips-list-small">
+                            <li>Eliminate distractions before starting</li>
+                            <li>Use breaks to stretch and rest your eyes</li>
+                            <li>Stay hydrated during work sessions</li>
+                            <li>Complete 4 work sessions before a long break</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="how-it-works">
+                <h3>How the Pomodoro Technique Works</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Choose a Task</h4>
+                        <p>Pick a task from your schedule that you want to focus on</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Work for 25 Minutes</h4>
+                        <p>Focus solely on your task until the timer rings</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Take a Short Break</h4>
+                        <p>Rest for 5 minutes to recharge</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Repeat & Rest</h4>
+                        <p>After 4 sessions, take a longer 15-minute break</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 WellUp. Built for Republic Polytechnic students with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification" role="alert" aria-live="polite"></div>
+
+    <script src="js/focus.js"></script>
+</body>
+</html>

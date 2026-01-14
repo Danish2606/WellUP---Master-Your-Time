@@ -11,12 +11,7 @@ const state = {
     tasks: [],
     importantDates: [],
     currentFilter: 'all',
-    level: 1,
-    xp: 0,
-    xpNeeded: 100,
-    tasksCompleted: 0,
-    streak: 0,
-    lastCompletionDate: null
+    tasksCompleted: 0
 };
 
 // ==========================================
@@ -29,8 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTasks();
     renderDates();
     updateStats();
-    updateProgressBar();
-    checkStreak();
     setMinDate();
 });
 
@@ -99,19 +92,8 @@ function handleTaskSubmit(e) {
 }
 
 function calculateXP(priority, deadline) {
-    let xp = 10;
-    
-    const priorityMultipliers = { high: 3, medium: 2, low: 1 };
-    xp *= priorityMultipliers[priority];
-    
-    if (deadline) {
-        const daysUntil = Math.ceil((new Date(deadline) - new Date()) / (1000 * 60 * 60 * 24));
-        if (daysUntil <= 1) xp += 20;
-        else if (daysUntil <= 3) xp += 10;
-        else if (daysUntil <= 7) xp += 5;
-    }
-    
-    return xp;
+    // XP calculation removed - no longer using gamification
+    return 0;
 }
 
 function toggleTask(id) {
@@ -132,21 +114,15 @@ function toggleTask(id) {
         state.tasksCompleted = Math.max(0, state.tasksCompleted - 1);
     }
     
+    saveToLocatasksCompleted++;
+        showNotification('Task completed! Great work! 🎉');
+    } else {
+        state.tasksCompleted = Math.max(0, state.tasksCompleted - 1);
+    }
+    
     saveToLocalStorage();
     renderTasks();
-    updateStats();
-    updateProgressBar();
-}
-
-function deleteTask(id) {
-    const taskIndex = state.tasks.findIndex(t => t.id === id);
-    if (taskIndex === -1) return;
-    
-    const task = state.tasks[taskIndex];
-    
-    if (task.completed) {
-        state.xp = Math.max(0, state.xp - task.xpValue);
-        state.tasksCompleted = Math.max(0, state.tasksCompleted - 1);
+    updateStatsmpleted = Math.max(0, state.tasksCompleted - 1);
     }
     
     state.tasks.splice(taskIndex, 1);
@@ -162,15 +138,13 @@ function renderTasks() {
     const filteredTasks = getFilteredTasks();
     
     if (filteredTasks.length === 0) {
-        taskList.innerHTML = `
-            <div style="text-align: center; padding: 2rem; color: var(--light-gray);">
-                <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📋</p>
-                <p>No tasks yet. Add your first task above!</p>
-            </div>
-        `;
-        return;
+        taskLitasksCompleted = Math.max(0, state.tasksCompleted - 1);
     }
     
+    state.tasks.splice(taskIndex, 1);
+    saveToLocalStorage();
+    renderTasks();
+    updateStats
     const fragment = document.createDocumentFragment();
     
     filteredTasks.forEach(task => {
@@ -210,8 +184,7 @@ function createTaskElement(task) {
     
     div.querySelector('.task-checkbox').addEventListener('change', () => toggleTask(task.id));
     div.querySelector('.delete-btn').addEventListener('click', () => deleteTask(task.id));
-    
-    return div;
+    iv;
 }
 
 function getFilteredTasks() {
@@ -362,79 +335,16 @@ function checkLevelUp() {
         state.level++;
         state.xpNeeded = Math.floor(state.xpNeeded * 1.5);
         showNotification(`🎊 Level Up! You're now Level ${state.level}!`, 3000);
-    }
-}
-
-function updateStreak() {
-    const today = new Date().toDateString();
-    const lastDate = state.lastCompletionDate;
-    
-    if (!lastDate) {
-        state.streak = 1;
-    } else {
-        const lastCompletionDate = new Date(lastDate).toDateString();
-        const yesterday = new Date(Date.now() - 86400000).toDateString();
-        
-        if (lastCompletionDate === today) {
-            return;
-        } else if (lastCompletionDate === yesterday) {
-            state.streak++;
-        } else {
-            state.streak = 1;
-        }
-    }
-    
-    state.lastCompletionDate = new Date().toISOString();
-}
-
-function checkStreak() {
-    if (!state.lastCompletionDate) return;
-    
-    const today = new Date().toDateString();
-    const lastDate = new Date(state.lastCompletionDate).toDateString();
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    
-    if (lastDate !== today && lastDate !== yesterday) {
-        state.streak = 0;
-        saveToLocalStorage();
-        updateStats();
-    }
-}
+   Statistics Update
+// ==========================================
 
 function updateStats() {
     const pendingTasks = state.tasks.filter(t => !t.completed).length;
+    const totalTasks = state.tasks.length;
     
     document.getElementById('tasks-completed').textContent = state.tasksCompleted;
     document.getElementById('pending-tasks').textContent = pendingTasks;
-    document.getElementById('current-streak').textContent = state.streak;
-    document.getElementById('level-display').textContent = state.level;
-    document.getElementById('level').textContent = state.level;
-    document.getElementById('xp').textContent = state.xp;
-    document.getElementById('xp-needed').textContent = state.xpNeeded;
-}
-
-function updateProgressBar() {
-    const percentage = (state.xp / state.xpNeeded) * 100;
-    document.getElementById('progress-fill').style.width = `${percentage}%`;
-}
-
-function celebrateTaskCompletion() {
-    const progressFill = document.getElementById('progress-fill');
-    progressFill.style.transition = 'none';
-    progressFill.style.transform = 'scale(1.05)';
-    setTimeout(() => {
-        progressFill.style.transition = 'all var(--transition-slow)';
-        progressFill.style.transform = 'scale(1)';
-    }, 200);
-}
-
-// ==========================================
-// Theme Toggle
-// ==========================================
-
-function toggleTheme() {
-    document.body.classList.toggle('light-theme');
-    const isLight = document.body.classList.contains('light-theme');
+    document.getElementById('total-tasks').textContent = totalTaskssLight = document.body.classList.contains('light-theme');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
 }
 
@@ -531,3 +441,4 @@ document.addEventListener('keydown', (e) => {
         toggleTheme();
     }
 });
+tasksCompleted: state.tasksCompleted
