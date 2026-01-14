@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WellUp - Smart Scheduling for Republic Polytechnic students">
+    <meta name="theme-color" content="#00563F">
+    <title>Smart Scheduling - WellUp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1 class="logo">WellUp</h1>
+                </a>
+                <span class="tagline">Smart Scheduling</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="scheduling.html" class="nav-link">Schedule</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                <a href="focus.html" class="nav-link">Focus</a>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scheduling Dashboard -->
+    <section class="scheduling-page">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Smart Scheduling</h2>
+                <p class="page-subtitle">Manage your tasks, deadlines, and important dates all in one place</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="tasks-completed">0</span>
+                    <span class="stat-label">Tasks Completed</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="pending-tasks">0</span>
+                    <span class="stat-label">Pending Tasks</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="current-streak">0</span>
+                    <span class="stat-label">Day Streak</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="level-display">1</span>
+                    <span class="stat-label">Level</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-section">
+                <div class="progress-header">
+                    <span>Level <span id="level">1</span></span>
+                    <span><span id="xp">0</span> / <span id="xp-needed">100</span> XP</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="scheduling-grid">
+                <!-- Left Column: Task Management -->
+                <div class="schedule-column">
+                    <div class="schedule-card">
+                        <h3>📋 My Tasks</h3>
+                        
+                        <!-- Task Input -->
+                        <form id="task-form" class="task-form">
+                            <div class="form-column">
+                                <input 
+                                    type="text" 
+                                    id="task-input" 
+                                    class="task-input" 
+                                    placeholder="What needs to be done?"
+                                    required
+                                    aria-label="Task description"
+                                >
+                                <div class="form-row-inline">
+                                    <input 
+                                        type="date" 
+                                        id="task-deadline" 
+                                        class="task-deadline"
+                                        aria-label="Task deadline"
+                                        required
+                                    >
+                                    <select id="task-priority" class="task-priority" aria-label="Task priority">
+                                        <option value="low">Low</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="add-btn full-width">+ Add Task</button>
+                            </div>
+                        </form>
+
+                        <!-- Filter Options -->
+                        <div class="filter-section">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="active">Active</button>
+                            <button class="filter-btn" data-filter="completed">Completed</button>
+                            <button class="filter-btn" data-filter="high">High Priority</button>
+                        </div>
+
+                        <!-- Task List -->
+                        <div class="task-list" id="task-list" role="list">
+                            <!-- Tasks will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Important Dates -->
+                <div class="schedule-column">
+                    <div class="schedule-card">
+                        <h3>📆 Important Dates</h3>
+                        
+                        <!-- Important Date Input -->
+                        <form id="date-form" class="task-form">
+                            <div class="form-column">
+                                <input 
+                                    type="text" 
+                                    id="date-input" 
+                                    class="task-input" 
+                                    placeholder="e.g., End of year exams"
+                                    required
+                                    aria-label="Important date description"
+                                >
+                                <input 
+                                    type="date" 
+                                    id="date-value" 
+                                    class="task-deadline"
+                                    aria-label="Date"
+                                    required
+                                >
+                                <button type="submit" class="add-btn full-width">+ Add Important Date</button>
+                            </div>
+                        </form>
+
+                        <!-- Important Dates List -->
+                        <div class="dates-list" id="dates-list">
+                            <!-- Important dates will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Quick Tips -->
+                    <div class="schedule-card tips-card">
+                        <h3>💡 Quick Tips</h3>
+                        <ul class="tips-list">
+                            <li>Set realistic deadlines to avoid overwhelming yourself</li>
+                            <li>Use High priority for urgent exam dates and submissions</li>
+                            <li>Check off tasks daily to maintain your streak!</li>
+                            <li>Break large projects into smaller, manageable tasks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 WellUp. Built for Republic Polytechnic students with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification" role="alert" aria-live="polite"></div>
+
+    <script src="js/scheduling.js"></script>
+</body>
+</html>

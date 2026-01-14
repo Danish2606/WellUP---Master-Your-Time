@@ -37,23 +37,9 @@
         <div class="container">
             <div class="hero-content">
                 <h2 class="hero-title">Take Control of Your Time</h2>
-                <p class="hero-subtitle">Built for Republic Polytechnic students. Schedule activities, track deadlines, and level up your productivity game.</p>
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <span class="stat-number" id="tasks-completed">0</span>
-                        <span class="stat-label">Tasks Completed</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number" id="current-streak">0</span>
-                        <span class="stat-label">Day Streak</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number" id="level-display">1</span>
-                        <span class="stat-label">Level</span>
-                    </div>
-                </div>
-                <button class="cta-btn" onclick="document.getElementById('dashboard').scrollIntoView({behavior: 'smooth'})">
-                    Get Started
+                <p class="hero-subtitle">Built for Republic Polytechnic students. Master your schedule, track deadlines, and achieve your academic goals with ease.</p>
+                <button class="cta-btn" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+                    Explore Features
                 </button>
             </div>
         </div>
@@ -62,103 +48,33 @@
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">Why WellUp?</h2>
+            <h2 class="section-title">What WellUp Offers</h2>
+            <p style="text-align: center; color: var(--light-gray); margin-bottom: 2rem; font-size: 1.1rem;">Click on any feature to get started</p>
             <div class="features-grid">
-                <article class="feature-card">
+                <article class="feature-card" onclick="window.location.href='scheduling.html'">
                     <div class="feature-icon">📅</div>
                     <h3>Smart Scheduling</h3>
-                    <p>Organize your tasks with intelligent deadline tracking and priority management.</p>
+                    <p>Organize your tasks with intelligent deadline tracking, priority management, and important date markers. Never miss an exam or assignment deadline again.</p>
+                    <button class="feature-btn">Start Scheduling →</button>
                 </article>
-                <article class="feature-card">
+                <article class="feature-card" onclick="window.location.href='progress.html'">
                     <div class="feature-icon">🎮</div>
                     <h3>Gamified Progress</h3>
-                    <p>Earn points, level up, and maintain streaks as you complete tasks and stay productive.</p>
+                    <p>Earn points, level up, and maintain streaks as you complete tasks. Make productivity fun and rewarding with our achievement system.</p>
+                    <button class="feature-btn">View Progress →</button>
                 </article>
-                <article class="feature-card">
+                <article class="feature-card" onclick="window.location.href='focus.html'">
                     <div class="feature-icon">🎯</div>
                     <h3>Focus Mode</h3>
-                    <p>Pomodoro timer integration to help you concentrate and work efficiently.</p>
+                    <p>Pomodoro timer integration to help you concentrate and work efficiently. Build better study habits with timed focus sessions.</p>
+                    <button class="feature-btn">Start Focusing →</button>
                 </article>
-                <article class="feature-card">
+                <article class="feature-card" onclick="window.location.href='analytics.html'">
                     <div class="feature-icon">📊</div>
                     <h3>Track Progress</h3>
-                    <p>Visual analytics to understand your productivity patterns and celebrate wins.</p>
+                    <p>Visual analytics to understand your productivity patterns and celebrate wins. See your growth and optimize your workflow.</p>
+                    <button class="feature-btn">View Analytics →</button>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dashboard Section -->
-    <section id="dashboard" class="dashboard">
-        <div class="container">
-            <h2 class="section-title">Your Dashboard</h2>
-            
-            <!-- Progress Bar -->
-            <div class="progress-section">
-                <div class="progress-header">
-                    <span>Level <span id="level">1</span></span>
-                    <span><span id="xp">0</span> / <span id="xp-needed">100</span> XP</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-            </div>
-
-            <!-- Task Input -->
-            <div class="task-input-section">
-                <form id="task-form" class="task-form">
-                    <div class="form-row">
-                        <input 
-                            type="text" 
-                            id="task-input" 
-                            class="task-input" 
-                            placeholder="What needs to be done?"
-                            required
-                            aria-label="Task description"
-                        >
-                        <input 
-                            type="date" 
-                            id="task-deadline" 
-                            class="task-deadline"
-                            aria-label="Task deadline"
-                        >
-                        <select id="task-priority" class="task-priority" aria-label="Task priority">
-                            <option value="low">Low</option>
-                            <option value="medium" selected>Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                        <button type="submit" class="add-btn">Add Task</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Filter Options -->
-            <div class="filter-section">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="active">Active</button>
-                <button class="filter-btn" data-filter="completed">Completed</button>
-                <button class="filter-btn" data-filter="high">High Priority</button>
-            </div>
-
-            <!-- Task List -->
-            <div class="task-list" id="task-list" role="list">
-                <!-- Tasks will be dynamically added here -->
-            </div>
-
-            <!-- Pomodoro Timer -->
-            <div class="pomodoro-section">
-                <h3>Focus Timer</h3>
-                <div class="timer-display" id="timer-display">25:00</div>
-                <div class="timer-controls">
-                    <button id="timer-start" class="timer-btn">Start</button>
-                    <button id="timer-pause" class="timer-btn" disabled>Pause</button>
-                    <button id="timer-reset" class="timer-btn">Reset</button>
-                </div>
-                <div class="timer-mode">
-                    <button class="mode-btn active" data-mode="work">Work (25m)</button>
-                    <button class="mode-btn" data-mode="short">Short Break (5m)</button>
-                    <button class="mode-btn" data-mode="long">Long Break (15m)</button>
-                </div>
             </div>
         </div>
     </section>
@@ -173,6 +89,6 @@
     <!-- Notification Toast -->
     <div id="notification" class="notification" role="alert" aria-live="polite"></div>
 
-    <script src="js/app.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
